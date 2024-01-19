@@ -477,7 +477,7 @@ img{
     }
     
    .imagen-fondo{
-       width: 200%;
+       max-width: 1000px;
        height: 200%;
        margin-top: 6rem ;
     } 
