@@ -50,30 +50,10 @@ const vaciarcarrito = () => {
     });
 };
 
-vaciarcarrito(); // Llama a esta función después de cargar el DOM para configurar el evento de vaciar carrito
+vaciarcarrito();
 
 
 
-/*<div class="carrito-acciones">
-                             
-<div class="carrito-acciones-izquierda">
-      <button class="carrito-acciones-vaciar">Vaciar carrito</button>
- </div>
 
 
-<div class="carrito-acciones-derecha">
-        <div class="carrito-acciones-total">
-              <p>Total: </p>
-              <p> 0.00</p>
-        </div>
-            <button class="carrito-acciones-comprar">comprar</button>
- </div>
-</div>*/
-
-
-    const carritovacio = document.querySelector(".carrito-vacio"); // Cambié getElementsByClassName a querySelector
-    if (cart.length === '') {
-        carritovacio.classList.add("carrito-vacio-active");
-    } else {
-        carritovacio.classList.remove("carrito-vacio-active");
-    }
+  
