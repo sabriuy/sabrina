@@ -46,11 +46,11 @@ const vaciarcarrito = () => {
     botonvaciar.addEventListener("click", () => {
         const elcarrito = document.getElementById("carrito-productos");
         elcarrito.innerHTML = ''; // Limpiar el contenido del carrito
-        localStorage.removeItem("producto-en-carrito"); // Vaciar el almacenamiento local
+        localStorage.removeItem("producto-en-carrito"); 
     });
 };
 
-vaciarcarrito(); // Llama a esta función después de cargar el DOM para configurar el evento de vaciar carrito
+vaciarcarrito(); 
 
 
 
@@ -71,7 +71,7 @@ vaciarcarrito(); // Llama a esta función después de cargar el DOM para configu
 </div>*/
 
 
-    const carritovacio = document.querySelector(".carrito-vacio"); // Cambié getElementsByClassName a querySelector
+    const carritovacio = document.querySelector(".carrito-vacio");
     if (cart.length === '') {
         carritovacio.classList.add("carrito-vacio-active");
     } else {
