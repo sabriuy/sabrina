@@ -5,11 +5,11 @@ navToggle.addEventListener("click", ()=>{
 navCategorias.classList.toggle("navbar-categorias_visible")
 });
 
-
-
-
 const productos = [];
 const url = "../js/objetos.json";
+const contenedorProductos = document.getElementById("contenedor-productos");
+const contenedorCarrito = document.getElementById("contenedor-carrito");
+
 
 const traerproductos = async () => {
     try {
@@ -17,23 +17,15 @@ const traerproductos = async () => {
         if (response.ok) {
             const data = await response.json();
             productos.push(...data);
-            console.log(data);
             displayProductos();
         } else {
             throw new Error("No se pudieron cargar los productos");
         }
     } catch (error) {
-        contenedorProductos.innerHTML = ``;
+        contenedorProductos.innerHTML = "";
         console.error(error);
     }
 };
-
-
-const contenedorProductos = document.getElementById("contenedor-productos");
-const contenedorCarrito = document.getElementById("contenedor-carrito");
-
-
-
 const Toast = Swal.mixin({
     toast: true,
     position: 'center',
@@ -45,7 +37,6 @@ const Toast = Swal.mixin({
     timer: 1500,
     timerProgressBar: false,
   })
-  
 
 const displayProductos = () => {
     productos.forEach((producto) => {
@@ -56,41 +47,35 @@ const displayProductos = () => {
             <p class="producto-titulo">${producto.nombre}</p>
             <h2 class="precio">${producto.precio}</h2>
             <button class="producto-ver" data-producto='${JSON.stringify(producto)}'>Agregar al carrito</button>`;
-        contenedorProductos.append(contenido);
+        contenedorProductos.appendChild(contenido);
     });
 };
 
-    const carrito = (producto) => {
-        localStorage.setItem("producto-en-carrito", JSON.stringify(productocarritoAgregado));
-        productocarritoAgregado.push(producto);
-        localStorage.setItem("producto-en-carrito", JSON.stringify(productocarritoAgregado));
 
-        console.log("Productos en el carrito:", productocarritoAgregado);
-    
+const carrito = (producto) => {
+    let productocarritoAgregado = JSON.parse(localStorage.getItem("producto-en-carrito")) || [];
+    productocarritoAgregado.push(producto);
+    localStorage.setItem("producto-en-carrito", JSON.stringify(productocarritoAgregado));
+    console.log("Producto agregado al carrito:", producto);
+
+     
     (async () => {
         await Toast.fire({
           icon: 'success',
           title: 'producto agregado en carrito',
         })
       })()
-      
 };
 
 
-displayProductos();
-
 document.addEventListener("DOMContentLoaded", () => {
-    const botonesAgregar = document.querySelectorAll(".producto-ver");
-    botonesAgregar.forEach((boton) => {
-        boton.addEventListener("click", () => {
-            const producto = JSON.parse(boton.getAttribute("data-producto"));
-            carrito(producto);
-            
-        });
-    });
-}); 
-
-traerproductos();
+    traerproductos();
+});
 
 
-
+document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("producto-ver")) {
+        const producto = JSON.parse(event.target.getAttribute("data-producto"));
+        carrito(producto);
+    }
+});
