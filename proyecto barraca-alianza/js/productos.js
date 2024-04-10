@@ -79,3 +79,24 @@ document.addEventListener("click", (event) => {
         carrito(producto);
     }
 });
+
+const barra = document.querySelector("input#text");
+
+barra.addEventListener('keyup', e => {
+    if (e.target.matches("#text")) {
+        const filtro = e.target.value.toLowerCase();
+        contenedorProductos.innerHTML = ""; 
+        productos.filter(producto => {
+            if (producto.nombre.toLowerCase().includes(filtro)) {
+                const contenido = document.createElement("div");
+                contenido.className = "producto";
+                contenido.innerHTML = `
+                    <img class="producto-imagen" src="${producto.imagen}">
+                    <p class="producto-titulo">${producto.nombre}</p>
+                    <h2 class="precio">${producto.precio}</h2>
+                    <button class="producto-ver" data-producto='${JSON.stringify(producto)}'>Agregar al carrito</button>`;
+                contenedorProductos.appendChild(contenido);
+            }
+        });
+    }
+});
