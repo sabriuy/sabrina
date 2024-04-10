@@ -81,22 +81,31 @@ document.addEventListener("click", (event) => {
 });
 
 const barra = document.querySelector("input#text");
+const menuDesplegable = document.getElementById("menu-desplegable");
 
 barra.addEventListener('keyup', e => {
     if (e.target.matches("#text")) {
         const filtro = e.target.value.toLowerCase();
-        contenedorProductos.innerHTML = ""; 
+        menuDesplegable.innerHTML = ""; 
+        
+        if (filtro === "") {
+            
+            return;
+        }
+
         productos.filter(producto => {
             if (producto.nombre.toLowerCase().includes(filtro)) {
-                const contenido = document.createElement("div");
-                contenido.className = "producto";
-                contenido.innerHTML = `
-                    <img class="producto-imagen" src="${producto.imagen}">
-                    <p class="producto-titulo">${producto.nombre}</p>
-                    <h2 class="precio">${producto.precio}</h2>
-                    <button class="producto-ver" data-producto='${JSON.stringify(producto)}'>Agregar al carrito</button>`;
-                contenedorProductos.appendChild(contenido);
-            }
+                const busqueda = document.createElement("div");
+                busqueda.className = "busqueda";
+                busqueda.innerHTML = `
+                    <img class="carrito-producto-imagen" src="${producto.imagen}">
+                    <p class="carrito-producto-titulo"><small><h4>Nombre:</h4></small>${producto.nombre}</p>
+                    <h2 class="carrito-producto-precio-menu"><small>Precio: </small>${producto.precio}</h2>
+                    <button class="producto-ver" id="producto-ver-menu" data-producto='${JSON.stringify(producto)}'>Agregar al carrito</button>`;
+                menuDesplegable.appendChild(busqueda);
+             }
         });
     }
 });
+
+
