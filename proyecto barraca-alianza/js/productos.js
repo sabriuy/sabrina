@@ -5,6 +5,9 @@ navToggle.addEventListener("click", ()=>{
 navCategorias.classList.toggle("navbar-categorias_visible")
 });
 
+
+
+
 const productos = [];
 const url = "../js/objetos.json";
 const contenedorProductos = document.getElementById("contenedor-productos");
@@ -57,7 +60,7 @@ const carrito = (producto) => {
     productocarritoAgregado.push(producto);
     localStorage.setItem("producto-en-carrito", JSON.stringify(productocarritoAgregado));
     console.log("Producto agregado al carrito:", producto);
-
+    contadorCarrito() 
      
     (async () => {
         await Toast.fire({
@@ -109,3 +112,18 @@ barra.addEventListener('keyup', e => {
 });
 
 
+
+
+
+function contadorCarrito (){
+    let numerito = document.querySelector("#numerito");
+    let productocarritoAgregado = JSON.parse(localStorage.getItem("producto-en-carrito"))
+    if(productocarritoAgregado===0){
+  numerito.textContent = 0
+    }else
+  {   numerito.textContent = productocarritoAgregado.length}
+   
+  }
+  
+  
+ 
