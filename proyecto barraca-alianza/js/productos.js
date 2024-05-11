@@ -29,6 +29,7 @@ const traerproductos = async () => {
         console.error(error);
     }
 };
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'center',
@@ -61,6 +62,18 @@ const carrito = (producto) => {
     localStorage.setItem("producto-en-carrito", JSON.stringify(productocarritoAgregado));
     console.log("Producto agregado al carrito:", producto);
     contadorCarrito() 
+
+    function contadorCarrito (){
+        let numerito = document.querySelector("#numerito");
+        let productocarritoAgregado = JSON.parse(localStorage.getItem("producto-en-carrito"))
+        if(productocarritoAgregado===0){
+      numerito.textContent = 0
+        }else
+      {   numerito.textContent = productocarritoAgregado.length}
+       
+      }
+      
+      
      
     (async () => {
         await Toast.fire({
@@ -115,15 +128,9 @@ barra.addEventListener('keyup', e => {
 
 
 
-function contadorCarrito (){
-    let numerito = document.querySelector("#numerito");
-    let productocarritoAgregado = JSON.parse(localStorage.getItem("producto-en-carrito"))
-    if(productocarritoAgregado===0){
-  numerito.textContent = 0
-    }else
-  {   numerito.textContent = productocarritoAgregado.length}
-   
-  }
-  
-  
+
  
+  
+  
+  
+  
