@@ -32,7 +32,7 @@ if (prod.length === 0) {
 
         const productoElemento = document.createElement("div");
         productoElemento.className = "carrito-producto";
-        productoElemento.dataset.index = index; // Añadir un índice para identificar el producto
+        productoElemento.dataset.index = index; 
         productoElemento.innerHTML = `
             <img class="carrito-producto-imagen" src="${producto.imagen}" alt="">
             <div class="carrito-producto-titulo">
@@ -90,7 +90,7 @@ const vaciarcarrito = () => {
         const elcarrito = document.getElementById("carrito-productos");
         elcarrito.innerHTML = '<p class="carrito-vacio">Tu carrito está vacío <i class="bi bi-emoji-frown"></i></p>';
         localStorage.removeItem("producto-en-carrito");
-        contadorCarrito(); // Asegúrate de definir esta función
+        contadorCarrito();
         preciototal = 0;
         contenedorPrecio.textContent = preciototal.toFixed(2);
     });
